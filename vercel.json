@@ -3,9 +3,11 @@
   "builds": [
     {
       "src": "package.json",
-      "use": "@vercel/angular",
+      "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist/hasael"
+        "distDir": "dist/hasael",
+        "installCommand": "npm install --legacy-peer-deps",
+        "buildCommand": "npm run build"
       }
     }
   ],
@@ -17,8 +19,5 @@
       "src": ".*",
       "dest": "/index.html"
     }
-  ],
-  "env": {
-    "NPM_FLAGS": "--legacy-peer-deps"
-  }
+  ]
 }
