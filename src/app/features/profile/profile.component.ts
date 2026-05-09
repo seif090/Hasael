@@ -1,30 +1,81 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent {
-  user = {
-    name: 'أحمد العتيبي',
-    email: 'ahmed@example.com',
-    phone: '+966 50 123 4567',
-    location: 'الرياض، المملكة العربية السعودية',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80'
+export class ProfileComponent implements OnInit {
+  user: User | null = null;
+  isEditing = false;
+  saving = false;
+
+  editForm = {
+    fullName: '',
+    email: '',
+    phone: '',
+    location: ''
   };
 
   activeTab = 'personal';
+
+  constructor(private authService: AuthService) { }
+
+  ngOnInit() {
+    this.authService.currentUser$.subscribe(user => {
+      this.user = user;
+      if (user) {
+        this.editForm = {
+          fullName: user.fullName,
+          email: user.email,
+          phone: user.phone,
+          location: user.location || ''
+        };
+      }
+    });
+  }
 
   setActiveTab(tab: string) {
     this.activeTab = tab;
   }
 
+  startEditing() {
+    this.isEditing = true;
+  }
+
+  cancelEditing() {
+    this.isEditing = false;
+    if (this.user) {
+      this.editForm = {
+        fullName: this.user.fullName,
+        email: this.user.email,
+        phone: this.user.phone,
+        location: this.user.location || ''
+      };
+    }
+  }
+
   saveChanges() {
-    console.log('Save profile changes');
+    if (!this.user) return;
+
+    this.saving = true;
+
+    // Simulate saving user data
+    setTimeout(() => {
+      this.saving = false;
+      this.isEditing = false;
+      alert('تم حفظ التغييرات بنجاح!');
+    }, 1000);
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

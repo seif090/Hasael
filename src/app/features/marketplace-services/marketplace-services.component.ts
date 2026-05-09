@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MachineryEquipmentComponent } from './components/machinery-equipment/machinery-equipment.component';
@@ -20,8 +20,10 @@ import { ConsultancyGuidanceComponent } from './components/consultancy-guidance/
   templateUrl: './marketplace-services.component.html',
   styleUrls: ['./marketplace-services.component.css']
 })
-export class MarketplaceServicesComponent {
+export class MarketplaceServicesComponent implements OnInit {
   activeTab = 'machinery';
+
+  ngOnInit() { }
 
   setActiveTab(tab: string) {
     this.activeTab = tab;

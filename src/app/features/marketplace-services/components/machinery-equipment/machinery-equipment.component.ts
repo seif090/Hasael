@@ -1,42 +1,93 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ServiceService } from '../../../../services/service.service';
+import { AuthService } from '../../../../services/auth.service';
+import { Service } from '../../../../models/service.model';
 
 @Component({
   selector: 'app-machinery-equipment',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './machinery-equipment.component.html',
   styleUrls: ['./machinery-equipment.component.css']
 })
-export class MachineryEquipmentComponent {
-  equipment = [
-    {
-      id: 1,
-      name: 'جرار زراعي - John Deere',
-      type: 'جرارات',
-      price: '150,000 ريال',
-      location: 'الرياض',
-      image: 'https://images.unsplash.com/photo-1586771107445-d3ca888129ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
-    },
-    {
-      id: 2,
-      name: 'حصادة قمح - CLAAS',
-      type: 'حصادات',
-      price: '350,000 ريال',
-      location: 'القصيم',
-      image: 'https://images.unsplash.com/photo-1574943320219-553eb213f72d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
-    },
-    {
-      id: 3,
-      name: 'نظام ري بالتنقيط',
-      type: 'أنظمة ري',
-      price: '45,000 ريال',
-      location: 'الشرقية',
-      image: 'https://images.unsplash.com/photo-1592982537447-6f2a6a0c7c18?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
-    }
-  ];
+export class MachineryEquipmentComponent implements OnInit {
+  services: Service[] = [];
+  isLoading = true;
+  selectedService: Service | null = null;
+  showRequestModal = false;
+  requesting = false;
+  requestDetails = {
+    startDate: '',
+    notes: ''
+  };
 
-  contactSeller(id: number) {
-    console.log('Contact seller for equipment:', id);
+  constructor(
+    private serviceService: ServiceService,
+    private authService: AuthService,
+    private router: Router
+  ) { }
+
+  ngOnInit() {
+    this.serviceService.getServices().subscribe(services => {
+      this.services = services.filter(s => s.category === 'machinery');
+      this.isLoading = false;
+    });
+  }
+
+  requestService(service: Service) {
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    this.selectedService = service;
+    this.showRequestModal = true;
+    this.requestDetails = {
+      startDate: '',
+      notes: ''
+    };
+  }
+
+  closeRequestModal() {
+    this.showRequestModal = false;
+    this.selectedService = null;
+    this.requestDetails = {
+      startDate: '',
+      notes: ''
+    };
+  }
+
+  confirmRequest() {
+    if (!this.selectedService || !this.requestDetails.startDate) return;
+
+    const user = this.authService.getCurrentUser();
+    if (!user) return;
+
+    this.requesting = true;
+
+    this.serviceService.requestService(
+      this.selectedService.id,
+      user.id,
+      new Date(this.requestDetails.startDate),
+      this.requestDetails.notes
+    ).subscribe({
+      next: () => {
+        this.requesting = false;
+        this.closeRequestModal();
+        alert('تم إرسال طلب الخدمة بنجاح!');
+      },
+      error: () => {
+        this.requesting = false;
+        alert('حدث خطأ أثناء إرسال الطلب. يرجى المحاولة مرة أخرى.');
+      }
+    });
+  }
+
+  getTotalPrice(): number {
+    if (!this.selectedService) return 0;
+    return this.selectedService.price;
   }
 }

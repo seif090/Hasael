@@ -2,34 +2,104 @@
   <!-- Header with CTA -->
   <div class="flex justify-between items-center">
     <h2 class="text-2xl font-bold text-text-dark">الآلات والمعدات الزراعية</h2>
-    <button class="btn-primary">+ إضافة معلن</button>
   </div>
 
-  <!-- Equipment Grid -->
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <div *ngFor="let item of equipment" class="card overflow-hidden hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-2 group">
+  <!-- Services Grid -->
+  <div *ngIf="!isLoading; else loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div *ngFor="let item of services"
+      class="card overflow-hidden hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-2 group">
       <div class="relative h-48 overflow-hidden">
-        <img [src]="item.image" [alt]="item.name" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+        <img [src]="item.images[0]" [alt]="item.title"
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
         <div class="absolute top-4 right-4 bg-primary-gold text-white px-3 py-1 rounded-full text-sm font-bold">
-          {{ item.type }}
+          {{ item.category === 'machinery' ? 'آلات' : 'خدمات' }}
+        </div>
+        <div *ngIf="!item.availability"
+          class="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold">
+          غير متاح
         </div>
       </div>
       <div class="p-6">
-        <h3 class="text-xl font-bold text-text-dark mb-2">{{ item.name }}</h3>
+        <h3 class="text-xl font-bold text-text-dark mb-2">{{ item.title }}</h3>
+        <p class="text-gray-600 text-sm mb-4">{{ item.description }}</p>
         <div class="flex items-center gap-2 text-gray-600 mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
             <circle cx="12" cy="10" r="3"></circle>
           </svg>
           <span>{{ item.location }}</span>
         </div>
-        <p class="text-primary-green font-bold text-2xl mb-4">{{ item.price }}</p>
-        <button
-          (click)="contactSeller(item.id)"
-          class="w-full btn-secondary"
-        >
-          التواصل مع البائع
+        <div class="flex items-center gap-2 text-gray-600 mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z">
+            </path>
+          </svg>
+          <span>{{ item.provider.rating }} ⭐</span>
+          <span class="text-sm">({{ item.provider.completedServices }} خدمة)</span>
+        </div>
+        <p class="text-primary-green font-bold text-2xl mb-4">{{ item.price }} ريال / {{ item.unit === 'hour' ? 'ساعة' :
+          item.unit === 'day' ? 'يوم' : 'مشروع' }}</p>
+        <button (click)="requestService(item)" class="w-full btn-secondary" [disabled]="!item.availability">
+          {{ item.availability ? 'طلب الخدمة' : 'غير متاح' }}
         </button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #loading>
+    <div class="text-center py-12">
+      <p class="text-gray-600">جاري التحميل...</p>
+    </div>
+  </ng-template>
+
+  <!-- Service Request Modal -->
+  <div *ngIf="showRequestModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-24 p-6 max-w-md w-full">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="text-xl font-bold text-text-dark">طلب الخدمة</h3>
+        <button (click)="closeRequestModal()" class="text-gray-500 hover:text-gray-700">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div *ngIf="selectedService" class="space-y-4">
+        <div class="bg-background-light rounded-20 p-4">
+          <h4 class="font-bold text-text-dark mb-2">{{ selectedService.title }}</h4>
+          <div class="text-sm text-gray-600">
+            <p>المزود: {{ selectedService.provider.name }}</p>
+            <p>السعر: {{ selectedService.price }} ريال / {{ selectedService.unit === 'hour' ? 'ساعة' :
+              selectedService.unit === 'day' ? 'يوم' : 'مشروع' }}</p>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">تاريخ البدء</label>
+          <input type="date" [(ngModel)]="requestDetails.startDate"
+            class="w-full px-4 py-3 rounded-20 border border-gray-300 focus:border-primary-green focus:ring-2 focus:ring-primary-green/20 outline-none">
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">ملاحظات (اختياري)</label>
+          <textarea [(ngModel)]="requestDetails.notes" rows="3"
+            class="w-full px-4 py-3 rounded-20 border border-gray-300 focus:border-primary-green focus:ring-2 focus:ring-primary-green/20 outline-none"
+            placeholder="أضف أي ملاحظات إضافية..."></textarea>
+        </div>
+
+        <div class="flex gap-3">
+          <button (click)="closeRequestModal()" class="flex-1 btn-secondary" [disabled]="requesting">
+            إلغاء
+          </button>
+          <button (click)="confirmRequest()" class="flex-1 btn-primary"
+            [disabled]="requesting || !requestDetails.startDate">
+            {{ requesting ? 'جاري الإرسال...' : 'تأكيد الطلب' }}
+          </button>
+        </div>
       </div>
     </div>
   </div>

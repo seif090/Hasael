@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -16,10 +17,13 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
 })
 export class RegisterComponent {
   registerForm: FormGroup;
+  isLoading = false;
+  errorMessage = '';
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {
     this.registerForm = this.fb.group({
       fullName: ['', [Validators.required, Validators.minLength(3)]],
@@ -37,8 +41,21 @@ export class RegisterComponent {
 
   onSubmit() {
     if (this.registerForm.valid) {
-      console.log('Register form submitted', this.registerForm.value);
-      // Add your registration logic here
+      this.isLoading = true;
+      this.errorMessage = '';
+
+      const { confirmPassword, ...registerData } = this.registerForm.value;
+
+      this.authService.register(registerData).subscribe({
+        next: () => {
+          this.isLoading = false;
+          this.router.navigate(['/dashboard']);
+        },
+        error: (error) => {
+          this.isLoading = false;
+          this.errorMessage = error.message || 'فشل التسجيل. يرجى المحاولة مرة أخرى.';
+        }
+      });
     }
   }
 

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-farm-management',
@@ -33,7 +35,13 @@ export class FarmManagementComponent {
     }
   ];
 
-  requestService() {
-    console.log('Request service');
+  constructor(private authService: AuthService, private router: Router) { }
+
+  requestService(serviceId: number) {
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigate(['/login']);
+      return;
+    }
+    alert(`تم اختيار خدمة الإدارة رقم ${serviceId}. سيتم التواصل معك قريباً!`);
   }
 }

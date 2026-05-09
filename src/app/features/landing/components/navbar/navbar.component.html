@@ -3,9 +3,8 @@
     <div class="flex justify-between items-center h-20">
       <!-- Logo -->
       <div class="flex-shrink-0">
-        <a routerLink="/landing"
-          class="text-3xl md:text-4xl font-bold text-primary-green hover:opacity-90 transition-opacity">
-          حصائل
+        <a routerLink="/landing" class="flex items-center gap-3 hover:opacity-90 transition-opacity">
+          <img src="assets/images/logo.png" alt="HASAEL Logo" class="h-10 w-auto">
         </a>
       </div>
 
@@ -27,8 +26,14 @@
 
       <!-- Desktop CTA Buttons -->
       <div class="hidden lg:flex items-center gap-4">
-        <a routerLink="/login" class="btn-secondary">تسجيل الدخول</a>
-        <a routerLink="/register" class="btn-primary">تسجيل</a>
+        <ng-container *ngIf="!isLoggedIn">
+          <a routerLink="/login" class="btn-secondary">تسجيل الدخول</a>
+          <a routerLink="/register" class="btn-primary">تسجيل</a>
+        </ng-container>
+        <ng-container *ngIf="isLoggedIn">
+          <span class="text-gray-700 font-medium">{{ currentUser?.fullName }}</span>
+          <button (click)="logout()" class="btn-secondary">تسجيل الخروج</button>
+        </ng-container>
       </div>
 
       <!-- Mobile Menu Button -->
@@ -59,8 +64,14 @@
           class="text-gray-700 hover:text-primary-green font-medium transition-colors">كيف نعمل</a>
         <a routerLink="/dashboard" (click)="closeMobileMenu()"
           class="text-gray-700 hover:text-primary-green font-medium transition-colors">لوحة التحكم</a>
-        <a routerLink="/login" (click)="closeMobileMenu()" class="btn-secondary text-center">تسجيل الدخول</a>
-        <a routerLink="/register" (click)="closeMobileMenu()" class="btn-primary text-center">تسجيل</a>
+        <ng-container *ngIf="!isLoggedIn">
+          <a routerLink="/login" (click)="closeMobileMenu()" class="btn-secondary text-center">تسجيل الدخول</a>
+          <a routerLink="/register" (click)="closeMobileMenu()" class="btn-primary text-center">تسجيل</a>
+        </ng-container>
+        <ng-container *ngIf="isLoggedIn">
+          <span class="text-gray-700 font-medium text-center">{{ currentUser?.fullName }}</span>
+          <button (click)="logout()" class="btn-secondary text-center">تسجيل الخروج</button>
+        </ng-container>
       </div>
     </div>
   </div>

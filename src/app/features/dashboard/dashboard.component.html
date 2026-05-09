@@ -5,10 +5,11 @@
       <div class="flex items-center justify-between">
         <div>
           <h1 class="text-3xl md:text-4xl font-bold mb-2">لوحة التحكم</h1>
-          <p class="text-white/90">مرحباً، {{ user.name }}</p>
+          <p class="text-white/90">مرحباً، {{ user?.fullName }}</p>
         </div>
         <div class="flex items-center gap-4">
-          <img [src]="user.avatar" [alt]="user.name" class="w-16 h-16 rounded-full border-2 border-white object-cover">
+          <img [src]="user?.avatar" [alt]="user?.fullName"
+            class="w-16 h-16 rounded-full border-2 border-white object-cover">
         </div>
       </div>
     </div>
@@ -21,20 +22,28 @@
       <div *ngFor="let stat of stats" class="card p-6">
         <div class="flex items-center gap-4">
           <div class="w-12 h-12 rounded-full bg-primary-green/10 flex items-center justify-center">
-            <svg *ngIf="stat.icon === 'trending-up'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F5C4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg *ngIf="stat.icon === 'trending-up'" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+              viewBox="0 0 24 24" fill="none" stroke="#0F5C4D" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
               <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
               <polyline points="17 6 23 6 23 12"></polyline>
             </svg>
-            <svg *ngIf="stat.icon === 'wallet'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F5C4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg *ngIf="stat.icon === 'wallet'" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+              viewBox="0 0 24 24" fill="none" stroke="#0F5C4D" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
               <path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"></path>
               <path d="M4 6v12c0 1.1.9 2 2 2h14v-4"></path>
               <path d="M18 12a2 2 0 0 0-2 2c0 1.1.9 2 2 2h4v-4h-4z"></path>
             </svg>
-            <svg *ngIf="stat.icon === 'dollar-sign'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F5C4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg *ngIf="stat.icon === 'dollar-sign'" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+              viewBox="0 0 24 24" fill="none" stroke="#0F5C4D" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
               <line x1="12" y1="1" x2="12" y2="23"></line>
               <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
             </svg>
-            <svg *ngIf="stat.icon === 'activity'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F5C4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg *ngIf="stat.icon === 'activity'" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+              viewBox="0 0 24 24" fill="none" stroke="#0F5C4D" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
               <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
             </svg>
           </div>
@@ -50,7 +59,8 @@
     <div class="card p-6 mb-8">
       <h2 class="text-xl font-bold text-text-dark mb-4">النشاطات الأخيرة</h2>
       <div class="space-y-4">
-        <div *ngFor="let activity of recentActivities" class="flex items-center justify-between p-4 bg-background-light rounded-20">
+        <div *ngFor="let activity of recentActivities"
+          class="flex items-center justify-between p-4 bg-background-light rounded-20">
           <div>
             <p class="font-medium text-text-dark">{{ activity.action }}</p>
             <p class="text-gray-600 text-sm">{{ activity.date }}</p>
@@ -62,9 +72,11 @@
 
     <!-- Quick Actions -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <a routerLink="/marketplace-investment" class="card p-6 text-center hover:shadow-soft-lg transition-all duration-300 cursor-pointer">
+      <a routerLink="/marketplace-investment"
+        class="card p-6 text-center hover:shadow-soft-lg transition-all duration-300 cursor-pointer">
         <div class="w-16 h-16 rounded-full bg-primary-green/10 flex items-center justify-center mx-auto mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0F5C4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+            stroke="#0F5C4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
             <circle cx="12" cy="10" r="3"></circle>
           </svg>
@@ -72,18 +84,22 @@
         <h3 class="font-bold text-text-dark mb-2">السوق الاستثماري</h3>
         <p class="text-gray-600 text-sm">تصفح الفرص الاستثمارية</p>
       </a>
-      <a routerLink="/marketplace-services" class="card p-6 text-center hover:shadow-soft-lg transition-all duration-300 cursor-pointer">
+      <a routerLink="/marketplace-services"
+        class="card p-6 text-center hover:shadow-soft-lg transition-all duration-300 cursor-pointer">
         <div class="w-16 h-16 rounded-full bg-primary-gold/10 flex items-center justify-center mx-auto mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4A62A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+            stroke="#D4A62A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
           </svg>
         </div>
         <h3 class="font-bold text-text-dark mb-2">الخدمات الزراعية</h3>
         <p class="text-gray-600 text-sm">ابحث عن الخدمات</p>
       </a>
-      <a routerLink="/profile" class="card p-6 text-center hover:shadow-soft-lg transition-all duration-300 cursor-pointer">
+      <a routerLink="/profile"
+        class="card p-6 text-center hover:shadow-soft-lg transition-all duration-300 cursor-pointer">
         <div class="w-16 h-16 rounded-full bg-primary-green/10 flex items-center justify-center mx-auto mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0F5C4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+            stroke="#0F5C4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
             <circle cx="12" cy="7" r="4"></circle>
           </svg>
