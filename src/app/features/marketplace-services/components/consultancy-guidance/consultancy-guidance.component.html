@@ -1,0 +1,29 @@
+<div class="space-y-6">
+  <!-- Header -->
+  <h2 class="text-2xl font-bold text-text-dark">الاستشارات والإرشاد</h2>
+
+  <!-- Consultants Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div *ngFor="let consultant of consultants" class="card p-6 hover:shadow-soft-lg transition-all duration-300">
+      <div class="text-center mb-4">
+        <img [src]="consultant.image" [alt]="consultant.name" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
+        <h3 class="text-xl font-bold text-text-dark mb-1">{{ consultant.name }}</h3>
+        <p class="text-primary-green font-medium mb-2">{{ consultant.specialty }}</p>
+        <div class="flex items-center justify-center gap-1 mb-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#D4A62A" stroke="none">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+          <span class="text-primary-gold font-bold">{{ consultant.rating }}</span>
+        </div>
+        <p class="text-gray-600 text-sm">خبرة: {{ consultant.experience }}</p>
+      </div>
+      <p class="text-primary-green font-bold text-center text-lg mb-4">{{ consultant.hourlyRate }}</p>
+      <button
+        (click)="bookConsultation(consultant.id)"
+        class="w-full btn-primary"
+      >
+        حجز استشارة
+      </button>
+    </div>
+  </div>
+</div>

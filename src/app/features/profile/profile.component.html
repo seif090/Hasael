@@ -1,0 +1,143 @@
+<div class="min-h-screen bg-background-light">
+  <!-- Header -->
+  <div class="bg-primary-green text-white py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl md:text-4xl font-bold">الملف الشخصي</h1>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Sidebar -->
+      <div class="lg:col-span-1">
+        <div class="card p-6">
+          <div class="text-center mb-6">
+            <img [src]="user.avatar" [alt]="user.name" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
+            <h3 class="text-xl font-bold text-text-dark">{{ user.name }}</h3>
+            <p class="text-gray-600">{{ user.email }}</p>
+          </div>
+          <nav class="space-y-2">
+            <button
+              (click)="setActiveTab('personal')"
+              [class]="activeTab === 'personal' ? 'bg-primary-green text-white' : 'text-gray-700 hover:bg-background-light'"
+              class="w-full py-3 px-4 rounded-20 text-right font-medium transition-all duration-300"
+            >
+              المعلومات الشخصية
+            </button>
+            <button
+              (click)="setActiveTab('security')"
+              [class]="activeTab === 'security' ? 'bg-primary-green text-white' : 'text-gray-700 hover:bg-background-light'"
+              class="w-full py-3 px-4 rounded-20 text-right font-medium transition-all duration-300"
+            >
+              الأمان والخصوصية
+            </button>
+            <button
+              (click)="setActiveTab('notifications')"
+              [class]="activeTab === 'notifications' ? 'bg-primary-green text-white' : 'text-gray-700 hover:bg-background-light'"
+              class="w-full py-3 px-4 rounded-20 text-right font-medium transition-all duration-300"
+            >
+              الإشعارات
+            </button>
+          </nav>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="lg:col-span-2">
+        <!-- Personal Information Tab -->
+        <div *ngIf="activeTab === 'personal'" class="card p-6">
+          <h2 class="text-xl font-bold text-text-dark mb-6">المعلومات الشخصية</h2>
+          <form class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">الاسم الكامل</label>
+              <input type="text" [value]="user.name" class="input-field w-full px-4 py-3 rounded-20 border border-gray-300 focus:border-primary-green focus:ring-2 focus:ring-primary-green/20 outline-none transition-all duration-300">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">البريد الإلكتروني</label>
+              <input type="email" [value]="user.email" class="input-field w-full px-4 py-3 rounded-20 border border-gray-300 focus:border-primary-green focus:ring-2 focus:ring-primary-green/20 outline-none transition-all duration-300">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">رقم الهاتف</label>
+              <input type="tel" [value]="user.phone" class="input-field w-full px-4 py-3 rounded-20 border border-gray-300 focus:border-primary-green focus:ring-2 focus:ring-primary-green/20 outline-none transition-all duration-300">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">الموقع</label>
+              <input type="text" [value]="user.location" class="input-field w-full px-4 py-3 rounded-20 border border-gray-300 focus:border-primary-green focus:ring-2 focus:ring-primary-green/20 outline-none transition-all duration-300">
+            </div>
+            <button
+              type="button"
+              (click)="saveChanges()"
+              class="btn-primary"
+            >
+              حفظ التغييرات
+            </button>
+          </form>
+        </div>
+
+        <!-- Security Tab -->
+        <div *ngIf="activeTab === 'security'" class="card p-6">
+          <h2 class="text-xl font-bold text-text-dark mb-6">الأمان والخصوصية</h2>
+          <form class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">كلمة المرور الحالية</label>
+              <input type="password" placeholder="أدخل كلمة المرور الحالية" class="input-field w-full px-4 py-3 rounded-20 border border-gray-300 focus:border-primary-green focus:ring-2 focus:ring-primary-green/20 outline-none transition-all duration-300">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">كلمة المرور الجديدة</label>
+              <input type="password" placeholder="أدخل كلمة المرور الجديدة" class="input-field w-full px-4 py-3 rounded-20 border border-gray-300 focus:border-primary-green focus:ring-2 focus:ring-primary-green/20 outline-none transition-all duration-300">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">تأكيد كلمة المرور</label>
+              <input type="password" placeholder="أعد إدخال كلمة المرور" class="input-field w-full px-4 py-3 rounded-20 border border-gray-300 focus:border-primary-green focus:ring-2 focus:ring-primary-green/20 outline-none transition-all duration-300">
+            </div>
+            <button
+              type="button"
+              (click)="saveChanges()"
+              class="btn-primary"
+            >
+              تحديث كلمة المرور
+            </button>
+          </form>
+        </div>
+
+        <!-- Notifications Tab -->
+        <div *ngIf="activeTab === 'notifications'" class="card p-6">
+          <h2 class="text-xl font-bold text-text-dark mb-6">الإشعارات</h2>
+          <div class="space-y-4">
+            <div class="flex items-center justify-between p-4 bg-background-light rounded-20">
+              <div>
+                <p class="font-medium text-text-dark">إشعارات الاستثمار</p>
+                <p class="text-gray-600 text-sm">تلقي إشعارات عند وجود فرص استثمارية جديدة</p>
+              </div>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" checked class="sr-only peer">
+                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-green"></div>
+              </label>
+            </div>
+            <div class="flex items-center justify-between p-4 bg-background-light rounded-20">
+              <div>
+                <p class="font-medium text-text-dark">إشعارات العوائد</p>
+                <p class="text-gray-600 text-sm">تلقي إشعارات عند تحصيل العوائد</p>
+              </div>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" checked class="sr-only peer">
+                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-green"></div>
+              </label>
+            </div>
+            <div class="flex items-center justify-between p-4 bg-background-light rounded-20">
+              <div>
+                <p class="font-medium text-text-dark">النشرات البريدية</p>
+                <p class="text-gray-600 text-sm">تلقي تحديثات وأخبار المنصة</p>
+              </div>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" class="sr-only peer">
+                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-green"></div>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
