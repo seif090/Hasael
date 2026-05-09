@@ -1,0 +1,64 @@
+<div class="space-y-6">
+  <!-- Search Header -->
+  <h2 class="text-2xl font-bold text-text-dark">البحث عن فرص استثمارية</h2>
+
+  <!-- Search Filters -->
+  <div class="card p-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">الموقع</label>
+        <select class="input-field w-full px-4 py-3 rounded-20 border border-gray-300 focus:border-primary-green focus:ring-2 focus:ring-primary-green/20 outline-none transition-all duration-300">
+          <option value="">كل المناطق</option>
+          <option value="riyadh">الرياض</option>
+          <option value="qassim">القصيم</option>
+          <option value="eastern">الشرقية</option>
+          <option value="madinah">المدينة المنورة</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">نطاق الاستثمار</label>
+        <select class="input-field w-full px-4 py-3 rounded-20 border border-gray-300 focus:border-primary-green focus:ring-2 focus:ring-primary-green/20 outline-none transition-all duration-300">
+          <option value="">كل النطاقات</option>
+          <option value="100k-500k">100,000 - 500,000 ريال</option>
+          <option value="500k-1m">500,000 - 1,000,000 ريال</option>
+          <option value="1m-5m">1,000,000 - 5,000,000 ريال</option>
+          <option value="5m+">أكثر من 5,000,000 ريال</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">نوع المحصول</label>
+        <select class="input-field w-full px-4 py-3 rounded-20 border border-gray-300 focus:border-primary-green focus:ring-2 focus:ring-primary-green/20 outline-none transition-all duration-300">
+          <option value="">كل المحاصيل</option>
+          <option value="wheat">قمح</option>
+          <option value="dates">تمور</option>
+          <option value="vegetables">خضروات</option>
+          <option value="fruits">فواكه</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">الحد الأدنى للعائد</label>
+        <select class="input-field w-full px-4 py-3 rounded-20 border border-gray-300 focus:border-primary-green focus:ring-2 focus:ring-primary-green/20 outline-none transition-all duration-300">
+          <option value="">الكل</option>
+          <option value="15%">15%+</option>
+          <option value="20%">20%+</option>
+          <option value="25%">25%+</option>
+        </select>
+      </div>
+    </div>
+    <button
+      (click)="searchOpportunities()"
+      class="w-full mt-6 btn-primary"
+    >
+      بحث
+    </button>
+  </div>
+
+  <!-- Results Placeholder -->
+  <div class="text-center py-12">
+    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#0F5C4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4 opacity-50">
+      <circle cx="11" cy="11" r="8"></circle>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+    <p class="text-gray-600 text-lg">استخدم الفلاتر للبحث عن فرص استثمارية</p>
+  </div>
+</div>

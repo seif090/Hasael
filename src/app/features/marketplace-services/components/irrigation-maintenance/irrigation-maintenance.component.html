@@ -1,0 +1,28 @@
+<div class="space-y-6">
+  <!-- Header -->
+  <h2 class="text-2xl font-bold text-text-dark">خدمات الري والصيانة</h2>
+
+  <!-- Services Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div *ngFor="let service of services" class="card p-6 hover:shadow-soft-lg transition-all duration-300">
+      <div class="mb-4">
+        <div class="flex items-center gap-1 mb-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#D4A62A" stroke="none">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+          <span class="text-primary-gold font-bold">{{ service.rating }}</span>
+        </div>
+        <h3 class="text-xl font-bold text-text-dark mb-2">{{ service.title }}</h3>
+        <p class="text-gray-600 mb-2">{{ service.description }}</p>
+        <p class="text-gray-500 text-sm mb-4">مقدم الخدمة: {{ service.provider }}</p>
+      </div>
+      <p class="text-primary-green font-bold text-lg mb-4">{{ service.price }}</p>
+      <button
+        (click)="bookService(service.id)"
+        class="w-full btn-primary"
+      >
+        حجز الخدمة
+      </button>
+    </div>
+  </div>
+</div>

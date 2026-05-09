@@ -1,0 +1,53 @@
+<div class="min-h-screen bg-background-light">
+  <!-- Header -->
+  <div class="bg-primary-green text-white py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl md:text-4xl font-bold mb-2">السوق الزراعي - الخدمات</h1>
+      <p class="text-white/90 text-lg">ابحث عن الخدمات الزراعية أو اقدم خدماتك</p>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="bg-white shadow-soft sticky top-20 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex space-x-8 space-x-reverse overflow-x-auto">
+        <button
+          (click)="setActiveTab('machinery')"
+          [class]="activeTab === 'machinery' ? 'border-b-4 border-primary-green text-primary-green' : 'text-gray-600 hover:text-primary-green'"
+          class="py-4 px-2 font-medium transition-colors whitespace-nowrap"
+        >
+          الآلات والمعدات
+        </button>
+        <button
+          (click)="setActiveTab('irrigation')"
+          [class]="activeTab === 'irrigation' ? 'border-b-4 border-primary-green text-primary-green' : 'text-gray-600 hover:text-primary-green'"
+          class="py-4 px-2 font-medium transition-colors whitespace-nowrap"
+        >
+          الري والصيانة
+        </button>
+        <button
+          (click)="setActiveTab('logistics')"
+          [class]="activeTab === 'logistics' ? 'border-b-4 border-primary-green text-primary-green' : 'text-gray-600 hover:text-primary-green'"
+          class="py-4 px-2 font-medium transition-colors whitespace-nowrap"
+        >
+          اللوجستics والنقل
+        </button>
+        <button
+          (click)="setActiveTab('consultancy')"
+          [class]="activeTab === 'consultancy' ? 'border-b-4 border-primary-green text-primary-green' : 'text-gray-600 hover:text-primary-green'"
+          class="py-4 px-2 font-medium transition-colors whitespace-nowrap"
+        >
+          الاستشارات والإرشاد
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <app-machinery-equipment *ngIf="activeTab === 'machinery'"></app-machinery-equipment>
+    <app-irrigation-maintenance *ngIf="activeTab === 'irrigation'"></app-irrigation-maintenance>
+    <app-logistics-transport *ngIf="activeTab === 'logistics'"></app-logistics-transport>
+    <app-consultancy-guidance *ngIf="activeTab === 'consultancy'"></app-consultancy-guidance>
+  </div>
+</div>
