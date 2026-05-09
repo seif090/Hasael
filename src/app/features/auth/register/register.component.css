@@ -1,0 +1,25 @@
+/* Register Component Styles */
+:host {
+  display: block;
+}
+
+.input-field {
+  transition: all 0.3s ease;
+}
+
+.input-field:focus {
+  border-color: #0F5C4D;
+  box-shadow: 0 0 0 3px rgba(15, 92, 77, 0.1);
+}
+
+button {
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
