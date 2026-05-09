@@ -72,7 +72,11 @@ export const mockProjects: InvestmentProject[] = [
       rating: 4.8,
       completedProjects: 12
     },
-    images: ['https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800'],
+    images: [
+      'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800',
+      'https://images.unsplash.com/photo-1500653243719-7b8e6b8e3c1a?w=800',
+      'https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800'
+    ],
     status: 'active',
     createdAt: new Date('2024-01-15')
   },
@@ -91,7 +95,11 @@ export const mockProjects: InvestmentProject[] = [
       rating: 4.9,
       completedProjects: 8
     },
-    images: ['https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=800'],
+    images: [
+      'https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=800',
+      'https://images.unsplash.com/photo-1548449173-0a0b23c0c8ea?w=800',
+      'https://images.unsplash.com/photo-1500653243719-7b8e6b8e3c1a?w=800'
+    ],
     status: 'active',
     createdAt: new Date('2024-02-01')
   },
@@ -110,7 +118,11 @@ export const mockProjects: InvestmentProject[] = [
       rating: 4.7,
       completedProjects: 5
     },
-    images: ['https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800'],
+    images: [
+      'https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800',
+      'https://images.unsplash.com/photo-1500653243719-7b8e6b8e3c1a?w=800',
+      'https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800'
+    ],
     status: 'active',
     createdAt: new Date('2024-03-10')
   },
@@ -129,7 +141,11 @@ export const mockProjects: InvestmentProject[] = [
       rating: 4.6,
       completedProjects: 15
     },
-    images: ['https://images.unsplash.com/photo-1548449173-0a0b23c0c8ea?w=800'],
+    images: [
+      'https://images.unsplash.com/photo-1548449173-0a0b23c0c8ea?w=800',
+      'https://images.unsplash.com/photo-1500653243719-7b8e6b8e3c1a?w=800',
+      'https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=800'
+    ],
     status: 'funded',
     createdAt: new Date('2024-01-20')
   },
@@ -148,7 +164,11 @@ export const mockProjects: InvestmentProject[] = [
       rating: 4.9,
       completedProjects: 20
     },
-    images: ['https://images.unsplash.com/photo-1587304382623-9a1e4737ee9b?w=800'],
+    images: [
+      'https://images.unsplash.com/photo-1587304382623-9a1e4737ee9b?w=800',
+      'https://images.unsplash.com/photo-1500653243719-7b8e6b8e3c1a?w=800',
+      'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800'
+    ],
     status: 'active',
     createdAt: new Date('2024-02-15')
   },
@@ -167,7 +187,11 @@ export const mockProjects: InvestmentProject[] = [
       rating: 4.5,
       completedProjects: 7
     },
-    images: ['https://images.unsplash.com/photo-1516045090785-2d71498e9646?w=800'],
+    images: [
+      'https://images.unsplash.com/photo-1516045090785-2d71498e9646?w=800',
+      'https://images.unsplash.com/photo-1500653243719-7b8e6b8e3c1a?w=800',
+      'https://images.unsplash.com/photo-1548449173-0a0b23c0c8ea?w=800'
+    ],
     status: 'active',
     createdAt: new Date('2024-03-05')
   }
@@ -235,7 +259,11 @@ export const mockServices: Service[] = [
     unit: 'hectare',
     location: 'الرياض',
     availability: true,
-    images: ['https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800'],
+    images: [
+      'https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800',
+      'https://images.unsplash.com/photo-1503614442490-3f931c8e3865?w=800',
+      'https://images.unsplash.com/photo-1516045090785-2d71498e9646?w=800'
+    ],
     createdAt: new Date('2024-01-20')
   },
   {
@@ -252,7 +280,11 @@ export const mockServices: Service[] = [
     unit: 'hour',
     location: 'القصيم',
     availability: true,
-    images: ['https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800'],
+    images: [
+      'https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800',
+      'https://images.unsplash.com/photo-1580674284081-9f4d3595d8e2?w=800',
+      'https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800'
+    ],
     createdAt: new Date('2024-02-05')
   },
   {
@@ -269,7 +301,11 @@ export const mockServices: Service[] = [
     unit: 'day',
     location: 'جميع المناطق',
     availability: true,
-    images: ['https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800'],
+    images: [
+      'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800',
+      'https://images.unsplash.com/photo-1601315487776-2df3ebc1dc25?w=800',
+      'https://images.unsplash.com/photo-1503614442490-3f931c8e3865?w=800'
+    ],
     createdAt: new Date('2024-02-15')
   },
   {
@@ -286,7 +322,11 @@ export const mockServices: Service[] = [
     unit: 'hour',
     location: 'عن بعد',
     availability: true,
-    images: ['https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800'],
+    images: [
+      'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800',
+      'https://images.unsplash.com/photo-1559839919-d707c9e0c27d?w=800',
+      'https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800'
+    ],
     createdAt: new Date('2024-03-01')
   },
   {
@@ -303,7 +343,11 @@ export const mockServices: Service[] = [
     unit: 'day',
     location: 'القصيم',
     availability: true,
-    images: ['https://images.unsplash.com/photo-1503614442490-3f931c8e3865?w=800'],
+    images: [
+      'https://images.unsplash.com/photo-1503614442490-3f931c8e3865?w=800',
+      'https://images.unsplash.com/photo-1516045090785-2d71498e9646?w=800',
+      'https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800'
+    ],
     createdAt: new Date('2024-03-10')
   },
   {
@@ -320,7 +364,11 @@ export const mockServices: Service[] = [
     unit: 'project',
     location: 'الرياض',
     availability: true,
-    images: ['https://images.unsplash.com/photo-1580674284081-9f4d3595d8e2?w=800'],
+    images: [
+      'https://images.unsplash.com/photo-1580674284081-9f4d3595d8e2?w=800',
+      'https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800',
+      'https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800'
+    ],
     createdAt: new Date('2024-03-20')
   },
   {
@@ -337,7 +385,11 @@ export const mockServices: Service[] = [
     unit: 'day',
     location: 'جميع المناطق',
     availability: true,
-    images: ['https://images.unsplash.com/photo-1601315487776-2df3ebc1dc25?w=800'],
+    images: [
+      'https://images.unsplash.com/photo-1601315487776-2df3ebc1dc25?w=800',
+      'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800',
+      'https://images.unsplash.com/photo-1503614442490-3f931c8e3865?w=800'
+    ],
     createdAt: new Date('2024-04-01')
   },
   {
@@ -354,7 +406,11 @@ export const mockServices: Service[] = [
     unit: 'hour',
     location: 'عن بعد',
     availability: true,
-    images: ['https://images.unsplash.com/photo-1559839919-d707c9e0c27d?w=800'],
+    images: [
+      'https://images.unsplash.com/photo-1559839919-d707c9e0c27d?w=800',
+      'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800',
+      'https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800'
+    ],
     createdAt: new Date('2024-04-10')
   }
 ];

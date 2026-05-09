@@ -49,12 +49,25 @@ export class LoginComponent {
     }
   }
 
+  loginWithGoogle() {
+    this.isLoading = true;
+    this.authService.loginWithGoogle('mock-google-token').subscribe({
+      next: () => {
+        this.isLoading = false;
+        this.router.navigate(['/dashboard']);
+      },
+      error: () => {
+        this.isLoading = false;
+        this.errorMessage = 'فشل تسجيل الدخول بجوجل';
+      }
+    });
+  }
+
   navigateToRegister() {
     this.router.navigate(['/register']);
   }
 
   forgotPassword() {
-    // Add forgot password logic
     console.log('Forgot password clicked');
   }
 }

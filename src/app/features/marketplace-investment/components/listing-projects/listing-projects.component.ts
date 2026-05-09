@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 import { InvestmentService } from '../../../../services/investment.service';
 import { AuthService } from '../../../../services/auth.service';
@@ -9,7 +10,7 @@ import { InvestmentProject } from '../../../../models/investment.model';
 @Component({
   selector: 'app-listing-projects',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './listing-projects.component.html',
   styleUrls: ['./listing-projects.component.css']
 })

@@ -1,0 +1,171 @@
+<div class="min-h-screen bg-gray-50" *ngIf="!isLoading && project">
+  <!-- Header -->
+  <div class="bg-white shadow-sm">
+    <div class="container mx-auto px-4 py-4">
+      <a routerLink="/marketplace-investment" class="text-primary-green hover:underline flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        العودة للمشاريع
+      </a>
+    </div>
+  </div>
+
+  <div class="container mx-auto px-4 py-8">
+    <!-- Project Header -->
+    <div class="bg-white rounded-20 shadow-sm p-6 mb-6">
+      <div class="flex flex-col lg:flex-row gap-6">
+        <!-- Image Gallery -->
+        <div class="w-full lg:w-1/2">
+          <div class="relative">
+            <img 
+              [src]="project.images[currentImageIndex]" 
+              [alt]="project.title"
+              class="w-full h-80 object-cover rounded-20"
+            />
+            <button 
+              *ngIf="project.images.length > 1"
+              (click)="prevImage()"
+              class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 rounded-full p-2 hover:bg-white"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M15 18l-6-6 6-6"/>
+              </svg>
+            </button>
+            <button 
+              *ngIf="project.images.length > 1"
+              (click)="nextImage()"
+              class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 rounded-full p-2 hover:bg-white"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M9 18l6-6-6-6"/>
+              </svg>
+            </button>
+            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+              <span 
+                *ngFor="let img of project.images; let i = index"
+                class="w-2 h-2 rounded-full"
+                [ngClass]="{'bg-white': i === currentImageIndex, 'bg-white/50': i !== currentImageIndex}"
+              ></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Info -->
+        <div class="w-full lg:w-1/2">
+          <span class="inline-block px-3 py-1 bg-primary-green/10 text-primary-green rounded-full text-sm font-medium mb-3">
+            {{ project.status === 'active' ? 'نشط' : project.status === 'funded' ? 'مكتمل التمويل' : 'مغلق' }}
+          </span>
+          <h1 class="text-3xl font-bold text-text-dark mb-3">{{ project.title }}</h1>
+          <p class="text-gray-600 mb-4">{{ project.description }}</p>
+          
+          <div class="grid grid-cols-2 gap-4 mb-4">
+            <div>
+              <span class="text-sm text-gray-500">الموقع</span>
+              <p class="font-semibold">{{ project.location }}</p>
+            </div>
+            <div>
+              <span class="text-sm text-gray-500">المدة</span>
+              <p class="font-semibold">{{ project.duration }} شهر</p>
+            </div>
+            <div>
+              <span class="text-sm text-gray-500">العائد المتوقع</span>
+              <p class="font-semibold text-primary-green">{{ project.expectedReturn }}%</p>
+            </div>
+            <div>
+              <span class="text-sm text-gray-500">تاريخ البدء</span>
+              <p class="font-semibold">{{ project.createdAt | date:'longDate':'':'ar-SA' }}</p>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <div class="flex justify-between text-sm mb-1">
+              <span>التمويل الحالي</span>
+              <span>{{ project.currentAmount | number }} / {{ project.targetAmount | number }} ريال</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-3">
+              <div 
+                class="bg-primary-green h-3 rounded-full" 
+                [style.width.%]="getProgressPercentage()"
+              ></div>
+            </div>
+            <p class="text-sm text-gray-500 mt-1">{{ getProgressPercentage() }}% مكتمل</p>
+          </div>
+
+          <div class="border-t pt-4">
+            <div class="flex items-center gap-3 mb-3">
+              <img 
+                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" 
+                alt="Farmer"
+                class="w-12 h-12 rounded-full object-cover"
+              />
+              <div>
+                <h4 class="font-semibold">{{ project.farmer.name }}</h4>
+                <div class="flex items-center gap-1 text-sm text-gray-600">
+                  <span>★ {{ project.farmer.rating }}</span>
+                  <span>•</span>
+                  <span>{{ project.farmer.completedProjects }} مشروع منجز</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Investment Section -->
+    <div class="bg-white rounded-20 shadow-sm p-6" *ngIf="project.status === 'active'">
+      <h2 class="text-2xl font-bold mb-4">استثمر في هذا المشروع</h2>
+      
+      <div *ngIf="!isLoggedIn()">
+        <p class="text-gray-600 mb-4">يجب تسجيل الدخول للاستثمار</p>
+        <a 
+          routerLink="/login" 
+          class="inline-block bg-primary-green text-white px-6 py-3 rounded-20 font-bold hover:opacity-90"
+        >
+          تسجيل الدخول
+        </a>
+      </div>
+
+      <div *ngIf="isLoggedIn()">
+        <div class="max-w-md">
+          <label class="block text-sm font-medium text-gray-700 mb-2">
+            مبلغ الاستثمار (بحد أقصى {{ getMaxInvestment() | number }} ريال)
+          </label>
+          <input 
+            type="number" 
+            [(ngModel)]="investmentAmount"
+            [max]="getMaxInvestment()"
+            [min]="100"
+            class="w-full px-4 py-3 rounded-20 border border-gray-300 focus:border-primary-green focus:ring-2 focus:ring-primary-green/20 outline-none"
+            placeholder="أدخل المبلغ"
+          />
+          <button 
+            (click)="confirmInvestment()"
+            [disabled]="!investmentAmount || investmentAmount < 100 || investmentAmount > getMaxInvestment()"
+            class="w-full mt-4 bg-primary-green text-white py-3 rounded-20 font-bold hover:opacity-90 disabled:opacity-50"
+          >
+            استثمر الآن
+          </button>
+          <p class="text-sm text-gray-500 mt-2">
+            سيحصل على عائد {{ project.expectedReturn }}% خلال {{ project.duration }} شهر
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="min-h-screen bg-gray-50 flex items-center justify-center" *ngIf="isLoading">
+  <div class="text-center">
+    <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-primary-green mx-auto mb-4"></div>
+    <p class="text-gray-600">جاري تحميل تفاصيل المشروع...</p>
+  </div>
+</div>
+
+<div class="min-h-screen bg-gray-50 flex items-center justify-center" *ngIf="!isLoading && !project">
+  <div class="text-center">
+    <h2 class="text-2xl font-bold text-gray-700 mb-2">لم يتم العثور على المشروع</h2>
+    <a routerLink="/marketplace-investment" class="text-primary-green hover:underline">العودة للمشاريع</a>
+  </div>
+</div>

@@ -5,7 +5,7 @@
   </div>
 
   <!-- Projects Grid -->
-  <div *ngIf="!isLoading; else loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     <div *ngFor="let project of projects"
       class="card overflow-hidden hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-2 group">
       <div class="relative h-48 overflow-hidden">
@@ -54,9 +54,14 @@
             <div class="bg-primary-green h-2 rounded-full" [style.width.%]="getProgressPercentage(project)"></div>
           </div>
         </div>
-        <button (click)="investInProject(project)" class="w-full btn-secondary">
-          الاستثمار الآن
-        </button>
+        <div class="flex gap-2">
+          <button [routerLink]="['/marketplace-investment/project', project.id]" class="flex-1 btn-secondary text-center">
+            عرض التفاصيل
+          </button>
+          <button (click)="investInProject(project)" class="flex-1 btn-primary">
+            استثمر الآن
+          </button>
+        </div>
       </div>
     </div>
   </div>

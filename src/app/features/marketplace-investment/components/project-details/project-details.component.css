@@ -1,0 +1,27 @@
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.rounded-20 {
+  border-radius: 20px;
+}
+
+.rounded-full {
+  border-radius: 9999px;
+}
+
+.text-primary-green {
+  color: #10B981;
+}
+
+.bg-primary-green {
+  background-color: #10B981;
+}
+
+.border-primary-green {
+  border-color: #10B981;
+}
+
+.text-text-dark {
+  color: #1F2937;
+}

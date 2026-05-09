@@ -59,6 +59,20 @@ export class RegisterComponent {
     }
   }
 
+  loginWithGoogle() {
+    this.isLoading = true;
+    this.authService.loginWithGoogle('mock-google-token').subscribe({
+      next: () => {
+        this.isLoading = false;
+        this.router.navigate(['/dashboard']);
+      },
+      error: () => {
+        this.isLoading = false;
+        this.errorMessage = 'فشل التسجيل بجوجل';
+      }
+    });
+  }
+
   navigateToLogin() {
     this.router.navigate(['/login']);
   }
