@@ -5,8 +5,7 @@
       "src": "package.json",
       "use": "@vercel/angular",
       "config": {
-        "distDir": "dist/hasael",
-        "installCommand": "npm install --legacy-peer-deps"
+        "distDir": "dist/hasael"
       }
     }
   ],
@@ -18,5 +17,8 @@
       "src": ".*",
       "dest": "/index.html"
     }
-  ]
+  ],
+  "env": {
+    "NPM_FLAGS": "--legacy-peer-deps"
+  }
 }
