@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ButtonComponent } from '../../../../shared/components/button/button.component';
-import { InputComponent } from '../../../../shared/components/input/input.component';
 
 @Component({
   selector: 'app-register',
@@ -11,16 +9,14 @@ import { InputComponent } from '../../../../shared/components/input/input.compon
   imports: [
     CommonModule,
     RouterModule,
-    ReactiveFormsModule,
-    ButtonComponent,
-    InputComponent
+    ReactiveFormsModule
   ],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
   registerForm: FormGroup;
-  
+
   constructor(
     private fb: FormBuilder,
     private router: Router

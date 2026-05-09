@@ -1,0 +1,53 @@
+<div class="min-h-screen bg-background-light">
+  <!-- Header -->
+  <div class="bg-primary-green text-white py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl md:text-4xl font-bold mb-2">السوق الزراعي - الاستثمار والعمليات</h1>
+      <p class="text-white/90 text-lg">استثمر في المشاريع الزراعية أو اعرض فرصك الاستثمارية</p>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="bg-white shadow-soft sticky top-20 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex space-x-8 space-x-reverse overflow-x-auto">
+        <button
+          (click)="setActiveTab('listings')"
+          [class]="activeTab === 'listings' ? 'border-b-4 border-primary-green text-primary-green' : 'text-gray-600 hover:text-primary-green'"
+          class="py-4 px-2 font-medium transition-colors whitespace-nowrap"
+        >
+          عرض الأراضي والمشاريع
+        </button>
+        <button
+          (click)="setActiveTab('search')"
+          [class]="activeTab === 'search' ? 'border-b-4 border-primary-green text-primary-green' : 'text-gray-600 hover:text-primary-green'"
+          class="py-4 px-2 font-medium transition-colors whitespace-nowrap"
+        >
+          البحث عن فرص استثمارية
+        </button>
+        <button
+          (click)="setActiveTab('management')"
+          [class]="activeTab === 'management' ? 'border-b-4 border-primary-green text-primary-green' : 'text-gray-600 hover:text-primary-green'"
+          class="py-4 px-2 font-medium transition-colors whitespace-nowrap"
+        >
+          خدمات إدارة المزارع
+        </button>
+        <button
+          (click)="setActiveTab('funding')"
+          [class]="activeTab === 'funding' ? 'border-b-4 border-primary-green text-primary-green' : 'text-gray-600 hover:text-primary-green'"
+          class="py-4 px-2 font-medium transition-colors whitespace-nowrap"
+        >
+          طلب تمويل أو خبرة
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <app-listing-projects *ngIf="activeTab === 'listings'"></app-listing-projects>
+    <app-investment-search *ngIf="activeTab === 'search'"></app-investment-search>
+    <app-farm-management *ngIf="activeTab === 'management'"></app-farm-management>
+    <app-funding-request *ngIf="activeTab === 'funding'"></app-funding-request>
+  </div>
+</div>

@@ -3,14 +3,10 @@
 @tailwind utilities;
 
 @layer base {
-  * {
-    @apply border-border;
-  }
-  
   html {
     @apply scroll-smooth;
   }
-  
+
   body {
     @apply bg-background-light text-text-dark font-cairo;
   }
@@ -20,23 +16,23 @@
   .btn-primary {
     @apply bg-primary-green text-white px-8 py-3 rounded-20 hover:opacity-90 transition-all duration-300 font-bold;
   }
-  
+
   .btn-secondary {
     @apply bg-white text-primary-green border-2 border-primary-green px-8 py-3 rounded-20 hover:bg-primary-green hover:text-white transition-all duration-300 font-bold;
   }
-  
+
   .btn-gold {
     @apply bg-primary-gold text-white px-8 py-3 rounded-20 hover:opacity-90 transition-all duration-300 font-bold;
   }
-  
+
   .input-field {
     @apply w-full px-4 py-3 rounded-20 border border-gray-300 focus:border-primary-green focus:ring-2 focus:ring-primary-green/20 outline-none transition-all duration-300;
   }
-  
+
   .card {
     @apply bg-white rounded-24 shadow-soft;
   }
-  
+
   .glassmorphism {
     @apply bg-white/10 backdrop-blur-md;
   }
