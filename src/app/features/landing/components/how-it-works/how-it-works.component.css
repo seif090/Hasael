@@ -1,0 +1,4 @@
+/* How It Works Component Styles */
+:host {
+  display: block;
+}

@@ -1,0 +1,65 @@
+<section id="opportunities" class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-text-dark mb-4">
+        فرص الاستثمار
+      </h2>
+      <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+        استكشف مجموعة متنوعة من فرص الاستثمار الزراعية مع عوائد مضمونة
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div *ngFor="let opportunity of opportunities" class="card overflow-hidden hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-2 group">
+        <!-- Image -->
+        <div class="relative h-64 overflow-hidden">
+          <img [src]="opportunity.image" [alt]="opportunity.title" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="absolute top-4 right-4 bg-primary-gold text-white px-4 py-2 rounded-full text-sm font-bold">
+            {{ opportunity.duration }}
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-text-dark mb-2">{{ opportunity.title }}</h3>
+          <div class="flex items-center gap-2 text-gray-600 mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span>{{ opportunity.location }}</span>
+          </div>
+
+          <!-- Stats -->
+          <div class="grid grid-cols-2 gap-4 mb-4">
+            <div class="bg-background-light rounded-20 p-3 text-center">
+              <p class="text-primary-green font-bold text-lg">{{ opportunity.returnRate }}</p>
+              <p class="text-gray-600 text-sm">نسبة العائد</p>
+            </div>
+            <div class="bg-background-light rounded-20 p-3 text-center">
+              <p class="text-primary-green font-bold text-lg">{{ opportunity.investmentDuration }}</p>
+              <p class="text-gray-600 text-sm">مدة الاستثمار</p>
+            </div>
+          </div>
+
+          <!-- Progress -->
+          <div class="mb-4">
+            <div class="flex justify-between text-sm mb-2">
+              <span class="text-gray-600">التقدم</span>
+              <span class="text-primary-green font-bold">{{ opportunity.progress }}%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2">
+              <div class="bg-primary-green h-2 rounded-full transition-all duration-500" [style.width]="opportunity.progress + '%'"></div>
+            </div>
+            <p class="text-gray-600 text-sm mt-2">{{ opportunity.investors }} مستثمر</p>
+          </div>
+
+          <!-- Button -->
+          <button class="w-full btn-primary">
+            تعرف على المزيد
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
