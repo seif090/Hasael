@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { map, delay, tap } from 'rxjs/operators';
 import { User, LoginCredentials, RegisterData } from '../models/user.model';
+import { mockUsers } from '../data/mock-data';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { User, LoginCredentials, RegisterData } from '../models/user.model';
 export class AuthService {
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
-  
+
   currentUser$ = this.currentUserSubject.asObservable();
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
 
@@ -26,28 +27,6 @@ export class AuthService {
   }
 
   login(credentials: LoginCredentials): Observable<User> {
-    // Simulate API call with mock data
-    const mockUsers: User[] = [
-      {
-        id: '1',
-        fullName: 'أحمد العتيبي',
-        email: 'ahmed@example.com',
-        phone: '0501234567',
-        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80',
-        memberSince: 'يناير 2024',
-        role: 'investor'
-      },
-      {
-        id: '2',
-        fullName: 'محمد السالم',
-        email: 'mohammed@example.com',
-        phone: '0507654321',
-        avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80',
-        memberSince: 'فبراير 2024',
-        role: 'farmer'
-      }
-    ];
-
     return of(mockUsers).pipe(
       delay(800),
       map(users => {
@@ -55,7 +34,6 @@ export class AuthService {
         if (!user) {
           throw new Error('بيانات الدخول غير صحيحة');
         }
-        // In real app, verify password hash
         return user;
       }),
       tap(user => {

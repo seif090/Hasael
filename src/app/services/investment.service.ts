@@ -2,86 +2,21 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map, delay } from 'rxjs/operators';
 import { InvestmentProject, Investment, FundingRequest } from '../models/investment.model';
+import { mockProjects, mockInvestments, mockFundingRequests } from '../data/mock-data';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InvestmentService {
-  private projectsSubject = new BehaviorSubject<InvestmentProject[]>([]);
-  private userInvestmentsSubject = new BehaviorSubject<Investment[]>([]);
-  private fundingRequestsSubject = new BehaviorSubject<FundingRequest[]>([]);
+  private projectsSubject = new BehaviorSubject<InvestmentProject[]>([...mockProjects]);
+  private userInvestmentsSubject = new BehaviorSubject<Investment[]>([...mockInvestments]);
+  private fundingRequestsSubject = new BehaviorSubject<FundingRequest[]>([...mockFundingRequests]);
 
   projects$ = this.projectsSubject.asObservable();
   userInvestments$ = this.userInvestmentsSubject.asObservable();
   fundingRequests$ = this.fundingRequestsSubject.asObservable();
 
-  constructor() {
-    this.loadMockProjects();
-  }
-
-  private loadMockProjects() {
-    const mockProjects: InvestmentProject[] = [
-      {
-        id: '1',
-        title: 'مشروع زراعة القمح في القصيم',
-        description: 'مشروع استثماري في زراعة القمح على مساحة 50 هكتار مع تكنولوجيا الري الحديثة',
-        category: 'crops',
-        targetAmount: 500000,
-        currentAmount: 350000,
-        expectedReturn: 15,
-        duration: 12,
-        location: 'القصيم',
-        farmer: {
-          name: 'عبدالله الدوسري',
-          rating: 4.8,
-          completedProjects: 12
-        },
-        images: ['https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800'],
-        status: 'active',
-        createdAt: new Date('2024-01-15')
-      },
-      {
-        id: '2',
-        title: 'مشروع تسمين الأغنام',
-        description: 'مشروع تسمين 500 رأس من الأغنام باستخدام أعلاف محلية عالية الجودة',
-        category: 'livestock',
-        targetAmount: 300000,
-        currentAmount: 280000,
-        expectedReturn: 18,
-        duration: 8,
-        location: 'الرياض',
-        farmer: {
-          name: 'سعود القحطاني',
-          rating: 4.9,
-          completedProjects: 8
-        },
-        images: ['https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=800'],
-        status: 'active',
-        createdAt: new Date('2024-02-01')
-      },
-      {
-        id: '3',
-        title: 'مشروع الزراعة المائية',
-        description: 'نظام زراعة مائية حديث للخضروات مع تكنولوجيا التحكم الآلي',
-        category: 'infrastructure',
-        targetAmount: 750000,
-        currentAmount: 200000,
-        expectedReturn: 20,
-        duration: 18,
-        location: 'الشرقية',
-        farmer: {
-          name: 'فهد الشمري',
-          rating: 4.7,
-          completedProjects: 5
-        },
-        images: ['https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800'],
-        status: 'active',
-        createdAt: new Date('2024-03-10')
-      }
-    ];
-
-    this.projectsSubject.next(mockProjects);
-  }
+  constructor() {}
 
   getProjects(): Observable<InvestmentProject[]> {
     return this.projects$;
